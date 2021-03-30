@@ -108,7 +108,6 @@ class Decoder(Model):
 
 
 
-  # maybe try to use beam search
   def inference_mode(self, states_1, states_2, training: bool=True):
     """Call Decoder in inference mode: Reconstructing the input using only start token and embeddings. 
     Each Decoder step gets the previous prediction of the Decoder as additional input.
