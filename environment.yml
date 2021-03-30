@@ -1,0 +1,16 @@
+name: LaTextGAN
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - pip
+  - tqdm
+  - numpy
+  - nltk
+  - gensim
+  - matplotlib
+  - scikit-learn
+  - jupyter
+  - bokeh
+  - tensorflow
+
