@@ -8,12 +8,13 @@ tfkl = tf.keras.layers
 
 class Encoder(Model):
   # We decided to use type hints whenever the user has the possibility to provide input
-  def __init__(self, vocab_size: int, embedding_matrix: np.ndarray, embedding_size: int=200):
+  def __init__(self, vocab_size: int, embedding_matrix: np.ndarray, bidirectional: bool=True, embedding_size: int=200):
     """Initialize the Encoder that creates an embedding of tweets
 
     Arguments:
       vocab_size (int): Defines the input dimensionality of the embedding layer
       embedding_matrix (ndarray): Sets the weights of the embedding layer
+      bidirectional (bool): Whether to use bidirectional LSTMs or not
       embedding_size (int): Defines the output dimensionality of the embedding layer
     """ 
 
@@ -21,8 +22,12 @@ class Encoder(Model):
 
     # We decided to pretrain our embeddings and therefore set the "trainable" parameter to False due to the limited amount of data at hand.
     # The mask_zero argument is set to True such that the layer can work with padded batches
+    self.bidirectional = bidirectional
     self.embedding = tfkl.Embedding(input_dim=vocab_size+1, output_dim=embedding_size, weights=[embedding_matrix], trainable=False, mask_zero=True)
-    self.lstm = tfkl.LSTM(units=100)
+    if bidirectional:
+        self.bi_lstm = tfkl.Bidirectional(tfkl.LSTM(units=100))
+    else:
+        self.lstm = tfkl.LSTM(units=100)
     self.dense = tfkl.Dense(600)
 
 
@@ -40,10 +45,12 @@ class Encoder(Model):
     """
 
     x = self.embedding(x)
-    hs = self.lstm(x, training=training)
+    if self.bidirectional:
+        hs = self.bi_lstm(x, training=training)
+    else:
+        hs = self.lstm(x, training=training)
     # Use this dense layer to project the hidden state size of the last encoding step (100) to the state size of the decoder (600) 
     dense_out = self.dense(hs, training=training) 
-
 
     return dense_out
 
@@ -132,7 +139,7 @@ class Decoder(Model):
 
 class AutoEncoder(Model):
 
-  def __init__(self, vocab_size: int, embedding_matrix: np.ndarray, embedding_size: int=200):
+  def __init__(self, vocab_size: int, embedding_matrix: np.ndarray, bidirectional: bool=True, embedding_size: int=200):
     """Initialize an Autoencoder consisting of an Encoder and Decoder
 
     Arguments:
@@ -143,7 +150,7 @@ class AutoEncoder(Model):
 
     super(AutoEncoder, self).__init__()
 
-    self.Encoder = Encoder(vocab_size=vocab_size, embedding_matrix=embedding_matrix, embedding_size=embedding_size)
+    self.Encoder = Encoder(vocab_size=vocab_size, embedding_matrix=embedding_matrix, bidirectional=bidirectional, embedding_size=embedding_size)
     self.Decoder = Decoder(vocab_size=vocab_size, embedding_matrix=embedding_matrix, embedding_size=embedding_size)
 
 
