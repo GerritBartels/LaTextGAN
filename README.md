@@ -8,4 +8,4 @@ The idea behind the LaTextGAN is to generate new sentences from a continuous low
 
 
 
-![Original LaTextGAN Architecture](https://github.com/GerritBartels/LaTextGAN/blob/[branch]/image.jpg?raw=true)
+![Original LaTextGAN Architecture](https://github.com/GerritBartels/LaTextGAN/blob/main/LaTextGAN_Schematic.jpg?raw=true)
