@@ -1,4 +1,4 @@
-# LaTextGAN
+# LaTextGAN for generating novel tweets in the style of Donald J. Trump 
 For this project we attempted to generate novel tweets in the style of Donald J. Trump  using the LaTextGAN approach from [David Donahue and Anna Rumshisky 2019](https://arxiv.org/pdf/1810.06640.pdf).
 
 ![Trump Face](https://cdn.talkingpointsmemo.com/wp-content/uploads/2019/06/trump-hiss.jpg)
