@@ -1,5 +1,5 @@
 # Modules
-This folder contains all the custom modules that are necessary for running our project in the [Colab Notebook](https://github.com/GerritBartels/LaTextGAN/tree/main/Colab%20Notebook).
+This folder contains all the custom modules that are necessary for running our project in the provided [Notebook](https://github.com/GerritBartels/LaTextGAN/tree/main/Colab%20Notebook).
 <br><br>
 * **ae.py:** Non-stacked/standard Autoencoder with option to add bidirectionality
 * **ae_training.py:** Training loop for the standard Autoencoder <br><br>
