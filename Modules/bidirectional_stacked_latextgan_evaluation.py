@@ -2,11 +2,12 @@
 import tensorflow as tf
 import numpy as np
 import gensim 
-from nltk.translate.bleu_score import SmoothingFunction, corpus_bleu
+from nltk.translate.bleu_score import corpus_bleu
 
 # Imports for latent space analysis
 from bokeh.models import Title
 from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
 from bokeh.plotting import figure, show, output_file
 from bokeh.palettes import Colorblind3                  # Color palette
 from bokeh.models import ColumnDataSource               # Allows creating a column dataset for convenient plotting
@@ -27,12 +28,18 @@ def tweet_generator(generator, autoencoder, word2vec_model: gensim.models.word2v
 
   print("Trump would tweet:")
   print()
+  average_length = 0
   for _ in range(num_tweets):
     noise_1 = tf.random.normal([1, 100])
     noise_2 = tf.random.normal([1, 100])
     states_1, states_2 = generator(noise_1, noise_2)
-    print(f"{' '.join([word2vec_model.wv.index2word[i.numpy()[0] -1] for i in autoencoder.Decoder.inference_mode(states_1=states_1, states_2=states_2, training=False) if i.numpy()[0] != 0])}")
+    tokens = [word2vec_model.wv.index2word[i.numpy()[0] -1] for i in autoencoder.Decoder.inference_mode(states_1=states_1, states_2=states_2, training=False) if i.numpy()[0] != 0]
+    average_length += len(tokens)
+    print(f"{' '.join(tokens)}")
     print()
+  print()
+  print(f"Average length of generated tweets: {average_length/num_tweets} tokens")
+  print()
 
 
 
@@ -58,9 +65,7 @@ def bleu4_score(generator, autoencoder, word2vec_model: gensim.models.word2vec.W
   
   hyp = generated_tweet
   
-  smoothingfunction = SmoothingFunction()
-  
-  score_bleu = corpus_bleu([bleu_reference for i in range(500)], hyp, weights=(.25, .25, .25, .25), smoothing_function=smoothingfunction.method4)
+  score_bleu = corpus_bleu([bleu_reference for i in range(500)], hyp, weights=(.25, .25, .25, .25), smoothing_function=None)
   
   return score_bleu
 
@@ -90,12 +95,20 @@ def latent_space_analysis(generator, autoencoder, train_dataset: tf.data.Dataset
     generator_tweets_embeddings.append(generator(noise_1, noise_2))
   generator_tweets_embeddings = [tweet for tweet_batch in generator_tweets_embeddings for tuplerone in tweet_batch for tweet in tuplerone]
 
+
+  pca = PCA(n_components=50, svd_solver="randomized", random_state=0)
+  pca_embedding_enc = pca.fit_transform(train_tweets_embeddings)
+  print('Cumulative explained variation for enocder embedding: {}'.format(np.sum(pca.explained_variance_ratio_)))
+  pca_embedding_gen = pca.fit_transform(generator_tweets_embeddings)
+  print('Cumulative explained variation for generator embedding: {}'.format(np.sum(pca.explained_variance_ratio_)))
+  
   # We apply the TSNE algorithm from scikit to get a 2D embedding of our latent space
   # Once for the Encoder
   tsne = TSNE(n_components=2, perplexity=30., random_state=0)
-  tsne_embedding_enc = tsne.fit_transform(train_tweets_embeddings)
+  tsne_embedding_enc = tsne.fit_transform(pca_embedding_enc)
   
-  tsne_embedding_gen = tsne.fit_transform(generator_tweets_embeddings)
+  # Once for the Generator
+  tsne_embedding_gen = tsne.fit_transform(pca_embedding_gen)
 
   # Plotting the TSNE embeddings
   labels =  ["Encoder" for _ in range(len(train_tweets_embeddings))]
