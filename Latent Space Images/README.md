@@ -5,29 +5,29 @@ To reduce the dimensions of the sequence vectors, we first used PCA to project t
 ---
 
 <p align="center">
-  <img width="600" height="550" src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Standard_LaTextGAN_All_Words.png?raw=true">
+  <img src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Standard_LaTextGAN_All_Words.png?raw=true">
 </p>
 
 ---
 
 <p align="center">
-  <img width="600" height="550" src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Standard_LaTextGAN_Remove_Rare_Words.png?raw=true">
+  <img src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Standard_LaTextGAN_Remove_Rare_Words.png?raw=true">
 </p>
 
 ---
 
 <p align="center">
-  <img width="600" height="550" src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Bidirectional_LaTextGAN_Remove_Rare_Words.png?raw=true">
+  <img src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Bidirectional_LaTextGAN_Remove_Rare_Words.png?raw=true">
 </p>
 
 ---
 
 <p align="center">
-  <img width="600" height="550" src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Stacked_LaTextGAN_Remove_Rare_Words.png?raw=true">
+  <img src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Stacked_LaTextGAN_Remove_Rare_Words.png?raw=true">
 </p>
 
 ---
 
 <p align="center">
-  <img width="600" height="550" src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Bidirectional_Stacked_LaTextGAN_Remove_Rare_Words.png?raw=true">
+  <img src="https://github.com/GerritBartels/LaTextGAN/blob/main/Latent%20Space%20Images/Bidirectional_Stacked_LaTextGAN_Remove_Rare_Words.png?raw=true">
 </p>
