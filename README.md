@@ -28,6 +28,7 @@ Showcase of generated tweets:
 * ill be playing with president putin and , tiger tomorrow . real deal thanks <End>
 * working hard to keep up today ! <End>
 * not hurt ! #votetrump ! <End>
+* @rodmonium <num> : your mother is good news for trump ? <End>
 ---
   
 If you want to run this project yourself you can either open our [Colab Notebook](https://github.com/GerritBartels/LaTextGAN/tree/main/Colab%20Notebook) and make a copy of it or download it onto your own machine. The provided environment.yml contains contains all the necessary dependencies to run this project locally.
