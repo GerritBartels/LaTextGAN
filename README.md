@@ -18,8 +18,16 @@ The GAN has been implemented as an improved variant of the original Wasserstein 
   
 ---
   
-Showcase:
-  
+Showcase of generated tweets:
+* its time , very proud of me . #makeamericagreatagain <End>
+* great job mark : thank you ! <End>
+* despite all horrible statements on me and clear that my administration has done a great job , but the media refuses to talk about them in the last <num> years . they have been saying that they couldnt get elected , and now the republican party is a joke ! <End>
+* heading to washington , d . c . the white house has done an incredible job . we are doing a great job ! we are all proud of the people of israel . they love you and , we are going to win ! <End>
+* will also fight against crazy charges ! <End>
+* will be interviewed by @seanhannity . make america great again ! <End>
+* ill be playing with president putin and , tiger tomorrow . real deal thanks <End>
+* working hard to keep up today ! <End>
+* not hurt ! #votetrump ! <End>
 ---
   
 If you want to run this project yourself you can either open our [Colab Notebook](https://github.com/GerritBartels/LaTextGAN/tree/main/Colab%20Notebook) and make a copy of it or download it onto your own machine. The provided environment.yml contains contains all the necessary dependencies to run this project locally.
